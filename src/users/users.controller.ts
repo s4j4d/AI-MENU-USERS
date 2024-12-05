@@ -1,4 +1,4 @@
-import { Controller, Get, Logger, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 // import { UpdateUserDto } from './dto/update-user-profile.dto';
@@ -16,7 +16,7 @@ export class UsersController extends BaseController {
   @Post()
   @ApiOperation({description:'create user'})
   @CommandRpc('users', 'users', 'create_user')
-  async createUser(data: CreateUserDto): Promise<any> {
+  async createUser(@Body()data: CreateUserDto): Promise<any> {
     const { __meta, ...d } = data;
     return this.service.createUser(data);
   }
@@ -24,7 +24,7 @@ export class UsersController extends BaseController {
   @Get('/:id/profile')
   @ApiOperation({description:'getUserProfile'})
   @QueryRpc('users', 'users', 'get_user_profile')
-  async getUserProfile(data: GetUserProfileDto): Promise<any> {
+  async getUserProfile(@Param()data: GetUserProfileDto): Promise<any> {
     const { __meta, ...d } = data;
     return this.service.getUserProfile(d, __meta);
   }
