@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Logger, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 // import { UpdateUserDto } from './dto/update-user-profile.dto';
 import { BaseController, CommandRpc, QueryRpc } from '../utils';
 import { GetUserProfileDto, GetUsersByUsernameOrMobileDto } from './dto';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiParam } from '@nestjs/swagger';
 
 @Controller('api/v1/users')
 export class UsersController extends BaseController {
@@ -23,8 +23,9 @@ export class UsersController extends BaseController {
 
   @Get('/:id/profile')
   @ApiOperation({description:'getUserProfile'})
+  @ApiParam({ name: 'id', example: 'ab51d4d3-e8d3-4754-828d-f943237ecd6f' })
   @QueryRpc('users', 'users', 'get_user_profile')
-  async getUserProfile(@Param()data: GetUserProfileDto): Promise<any> {
+  async getUserProfile(data: GetUserProfileDto): Promise<any> {
     const { __meta, ...d } = data;
     return this.service.getUserProfile(d, __meta);
   }
