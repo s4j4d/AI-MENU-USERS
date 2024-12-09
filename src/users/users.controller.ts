@@ -17,8 +17,9 @@ export class UsersController extends BaseController {
   @ApiOperation({description:'create user'})
   @CommandRpc('users', 'users', 'create_user')
   async createUser(@Body()data: CreateUserDto): Promise<any> {
+    this.logger.verbose(this.createUser.name)
     const { __meta, ...d } = data;
-    return this.service.createUser(data);
+    return this.service.createUser(d);
   }
 
   @Get('/:id/profile')

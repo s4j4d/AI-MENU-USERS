@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Metadata } from '../../utils/interfaces';
 
 export class GetUserByMobileDto {
@@ -8,7 +8,7 @@ export class GetUserByMobileDto {
   @ApiProperty()
   mobile: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
-  __meta: Metadata;
+  __meta?: Metadata;
 }

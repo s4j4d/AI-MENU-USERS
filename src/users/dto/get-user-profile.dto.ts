@@ -1,5 +1,6 @@
-import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { Metadata } from '../../utils/interfaces';
 
 export class GetUserProfileDto {
   @IsString()
@@ -12,6 +13,6 @@ export class GetUserProfileDto {
   id: string;
 
   @IsOptional()
-  @ApiHideProperty()
-  __meta?: object;
+  @ApiProperty()
+  __meta?: Metadata;
 }

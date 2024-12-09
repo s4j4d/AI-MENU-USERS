@@ -1,4 +1,4 @@
-import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 import { Metadata } from '../../utils/interfaces';
 
@@ -39,7 +39,7 @@ export class CreateUserDto {
   })
   password?: string;
 
-  @IsNotEmpty()
-  @ApiHideProperty()
-  __meta: Metadata;
+  @IsOptional()
+  @ApiProperty()
+  __meta?: Metadata;
 }

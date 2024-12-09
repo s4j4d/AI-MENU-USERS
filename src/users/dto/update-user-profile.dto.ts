@@ -99,7 +99,7 @@ export class UpdateUserProfileDto {
   })
   address?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
-  __meta: Metadata;
+  __meta?: Metadata;
 }
